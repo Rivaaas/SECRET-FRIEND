@@ -9,7 +9,7 @@ function App() {
   const [result, setResults] = useState(null);
   const [mailParticipants, setMailParticipants] = useState("");
 
- 
+
 
   const addParticipants = (members) => {
     setParticipants([...participants, members]);
@@ -32,7 +32,7 @@ function App() {
 
   const sendEmail = async (to, subject, text) => {
     try {
-      const response = await fetch('/api/send-eSmail', {
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,19 +43,19 @@ function App() {
           text, // Contenido del correo
         }),
       });
-  
+
       const data = await response.json();
       if (response.ok) {
-        // console.log(`Correo enviado exitosamente a ${to}:`, data);
+        console.log(`Correo enviado exitosamente a ${to}:`, data);
       } else {
-        // console.log(`Error al enviar correo a ${to}:`, data.error);
+        console.log(`Error al enviar correo a ${to}:`, data.error);
       }
     } catch (error) {
-      // console.error(`Error al intentar enviar correo a ${to}:`, error);
+      console.error(`Error al intentar enviar correo a ${to}:`, error);
     }
   };
-  
-  const sendEmails = async (asignaciones,participants) => {
+
+  const sendEmails = async (asignaciones, participants) => {
     for (const [key, value] of Object.entries(asignaciones)) {
 
       // Enviar correo a `key`
@@ -64,7 +64,7 @@ function App() {
         'Amigo Secreto',
         `Hola ${key}, te ha tocado ${value} como tu amigo secreto. ¡Cuida bien este secreto!`
       );
-  
+
       // Enviar correo a `value`
       await sendEmail(
         value,
@@ -86,16 +86,7 @@ function App() {
       ) : (
         <div>
           <h2>Resultados</h2>
-          <ul>
-            {Object.entries(result).map(([key, value]) => {
-            return(
-              <li key={key}>
-                {key} es el mejor amigo de {value}
-              </li>
-              
-            )}
-            )}
-          </ul>
+          <h1>RESULTADOS ENVIADOS A LOS CORREOS DE LOS PARTICIPANTES !:)</h1>
           <button onClick={() => setResults(null)}>Reiniciar</button>
         </div>
       )}
