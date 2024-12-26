@@ -32,7 +32,7 @@ function App() {
 
   const sendEmail = async (to, subject, text) => {
     try {
-      const response = await fetch('/api/send-email', {
+      const response = await fetch(`${process.env.SENDGRID_API_KEY}/send-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

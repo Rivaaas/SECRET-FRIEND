@@ -5,6 +5,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY); // Asegúrate de que la clave de
 export default async function handler(req, res) {
   console.log('Solicitud recibida');  // Esto te ayudará a verificar si la API está siendo alcanzada
 
+
   if (req.method === 'POST') {
     const { to, subject, text } = req.body;
 
@@ -28,4 +29,6 @@ export default async function handler(req, res) {
   } else {
     res.status(405).json({ message: 'Método no permitido' }); // En caso de que se use un método diferente a POST
   }
+
+  
 }
